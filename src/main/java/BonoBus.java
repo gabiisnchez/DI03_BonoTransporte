@@ -9,7 +9,7 @@ import java.net.URL;
  * Permite al usuario seleccionar un mes y confirmar la recarga de su bonobus.
  * Diseño con paleta de colores corporativos de Tussam (naranja y rojo).
  *
- * @author Gabriel Sánchez Heredia
+ * @author Alejandro Martínez Bou
  */
 public class BonoBus extends JFrame {
 
