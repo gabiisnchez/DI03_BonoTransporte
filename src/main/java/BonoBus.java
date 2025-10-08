@@ -31,28 +31,33 @@ public class BonoBus extends JFrame {
     // ============================
 
     // --- Paneles principales ---
-    private JPanel contenedor;
-    private JPanel panelIzquierdo;
-    private JPanel panelDerecho;
-    private JPanel panelHeader;
-    private JPanel panelSelector;
-    private JPanel panelBotones;
-    private JPanel panelInfo;
+
+    private JPanel contenedor;       // Panel principal que agrupa todos los elementos de la ventana
+    private JPanel panelIzquierdo;   // Panel lateral izquierdo con el icono y la información del bono
+    private JPanel panelDerecho;     // Panel lateral derecho con el selector de mes
+    private JPanel panelHeader;      // Panel superior con el título y subtítulo de la aplicación
+    private JPanel panelSelector;    // Panel interno del lado derecho que contiene el selector del mes
+    private JPanel panelBotones;     // Panel inferior con los botones "Volver" y "Recargar"
+    private JPanel panelInfo;        // Panel informativo dentro del panel izquierdo con detalles del bono
+
 
     // --- Etiquetas (JLabel) ---
-    private JLabel lblTitulo;
-    private JLabel lblSubtitulo;
-    private JLabel iconoBus;
-    private JLabel lblInstruccion;
-    private JLabel lblMes;
-    private JLabel lblInfo;
-    private JLabel lblDias;
-    private JLabel lblCalendario;
+
+    private JLabel lblTitulo;        // Título principal del encabezado ("RECARGA BONOBUS")
+    private JLabel lblSubtitulo;     // Subtítulo con el texto "Transportes Urbanos de Sevilla - TUSSAM"
+    private JLabel iconoBus;         // Icono representativo del autobús (imagen o emoji)
+    private JLabel lblInstruccion;   // Instrucción para que el usuario seleccione un mes
+    private JLabel lblMes;           // Etiqueta que acompaña al selector de mes ("MES:")
+    private JLabel lblInfo;          // Texto informativo adicional sobre el bono (uso ilimitado)
+    private JLabel lblDias;          // Texto que indica la duración del bono (30 días naturales)
+    private JLabel lblCalendario;    // Icono o emoji de calendario para reforzar el contexto del selector
+
 
     // --- Componentes interactivos ---
-    private JMonthChooser elegirMes;
-    private JButton btnRecargar;
-    private JButton btnVolver;
+
+    private JMonthChooser elegirMes; // Componente desplegable para seleccionar el mes de recarga
+    private JButton btnRecargar;     // Botón que confirma la recarga del bono bus
+    private JButton btnVolver;       // Botón para regresar a la ventana principal (login)
 
     // Array con los nombres de los meses en español
     private final String[] nombresMeses = {
@@ -169,7 +174,7 @@ public class BonoBus extends JFrame {
             URL imgURL = getClass().getResource("/bus_image.png");
             if (imgURL != null) {
                 ImageIcon icon = new ImageIcon(imgURL);
-                Image imagenEscalada = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                Image imagenEscalada = icon.getImage().getScaledInstance(215, 106, Image.SCALE_SMOOTH);
                 iconoBus.setIcon(new ImageIcon(imagenEscalada));
             } else {
                 iconoBus.setText("🚌");
@@ -402,15 +407,5 @@ public class BonoBus extends JFrame {
 
     private void createUIComponents() {
         elegirMes = new JMonthChooser();
-    }
-
-    // ============================
-    // METODO PRINCIPAL
-    // ============================
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            BonoBus ventana = new BonoBus();
-            ventana.setVisible(true);
-        });
     }
 }

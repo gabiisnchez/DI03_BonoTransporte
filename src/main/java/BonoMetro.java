@@ -429,21 +429,4 @@ public class BonoMetro extends JFrame {
     private void createUIComponents() {
         elegirMes = new JMonthChooser();
     }
-
-    // ============================
-    // METODO PRINCIPAL
-    // ============================
-    /**
-     * Punto de entrada de la aplicación.
-     * Crea y muestra la ventana en el hilo de eventos de Swing.
-     *
-     * @param args Argumentos de línea de comandos (no utilizados)
-     */
-    public static void main(String[] args) {
-        // Ejecutar la creación de la GUI en el Event Dispatch Thread
-        SwingUtilities.invokeLater(() -> {
-            BonoMetro ventana = new BonoMetro();
-            ventana.setVisible(true);
-        });
-    }
 }

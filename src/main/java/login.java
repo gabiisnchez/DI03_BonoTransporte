@@ -408,18 +408,8 @@ public class login extends JFrame {
             // Abrir ventana BonoBus
             SwingUtilities.invokeLater(() -> {
                 try {
-                    // Aquí deberías tener la clase BonoBus creada de forma similar a BonoMetro
-                    // BonoBus ventanaBus = new BonoBus();
-                    // ventanaBus.setVisible(true);
-
-                    // Por ahora mostramos un mensaje
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Accediendo al sistema BonoBus...\n(Debe crear la clase BonoBus similar a BonoMetro)",
-                            "BonoBus",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
-                    this.setVisible(true); // Volver a mostrar el login
+                    BonoBus ventanaBus = new BonoBus();
+                    ventanaBus.setVisible(true);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(
                             null,
