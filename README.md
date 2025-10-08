@@ -57,8 +57,38 @@ proyecto/
 ### Requisitos Previos
 
 - Java Development Kit (JDK) 8 o superior
-- IDE Java (IntelliJ IDEA, Eclipse, NetBeans, etc.)
-- Librería JCalendar 1.4
+- IDE Java (IntelliJ IDEA, Eclipse, NetBeans, etc.) o Maven
+- Maven (las dependencias se descargan automáticamente desde `pom.xml`)
+
+### Pasos para Ejecutar
+
+1. **Clonar o descargar el proyecto**
+   ```bash
+   git clone https://github.com/gabiisnchez/DI03_BonoTransporte
+   cd DI03_BonoTransporte
+   ```
+
+2. **Descargar dependencias** (automático con Maven)
+   ```bash
+   mvn clean install
+   ```
+   
+   > **📦 Nota:** La librería JCalendar 1.4 está configurada como dependencia en el archivo `pom.xml`, por lo que Maven la descargará automáticamente. No es necesario descargarla manualmente.
+
+3. **Ejecutar la aplicación**
+   
+   **Desde el IDE:**
+   - Abrir el proyecto en tu IDE favorito
+   - Localizar la clase `login.java` en el paquete `src/`
+   - **Hacer clic derecho sobre `login.java` → Run 'login.main()'**
+   - O simplemente ejecutar el método `main()` de la clase `login`
+
+   **Desde línea de comandos con Maven:**
+   ```bash
+   mvn exec:java -Dexec.mainClass="login"
+   ```
+
+> **⚠️ IMPORTANTE**: La clase `login.java` es el **punto de entrada** de la aplicación. Es la ventana principal que debe ejecutarse para iniciar el programa. Las clases `BonoBus.java` y `BonoMetro.java` son ventanas secundarias que se abren desde el login.
 
 ## 📖 Guía de Uso
 
