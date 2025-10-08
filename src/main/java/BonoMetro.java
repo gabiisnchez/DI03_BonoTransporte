@@ -156,8 +156,26 @@ public class BonoMetro extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 25, 20, 25));
 
         // Icono decorativo del tren (emoji)
-        iconoTren = new JLabel("🚄", SwingConstants.CENTER);
-        iconoTren.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+        iconoTren = new JLabel();
+        try {
+            URL imgURL = getClass().getResource("/title_image.png");
+            if (imgURL != null) {
+                ImageIcon icon = new ImageIcon(imgURL);
+                // Escalar la imagen a un tamaño adecuado (por ejemplo, 80x80)
+                Image imagenEscalada = icon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                iconoTren.setIcon(new ImageIcon(imagenEscalada));
+            } else {
+                // Fallback si no se encuentra la imagen
+                iconoTren.setText("🚄");
+                iconoTren.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+                System.err.println("Advertencia: No se encontró 'title_image.png' en resources.");
+            }
+        } catch (Exception e) {
+            iconoTren.setText("🚄");
+            iconoTren.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+            System.err.println("Error al cargar la imagen del título: " + e.getMessage());
+        }
+        iconoTren.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Título principal en blanco y negrita
         lblTitulo = new JLabel("RECARGA BONOMETRO", SwingConstants.CENTER);
