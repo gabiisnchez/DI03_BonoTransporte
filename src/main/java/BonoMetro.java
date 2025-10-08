@@ -22,6 +22,8 @@ public class BonoMetro extends JFrame {
     private static final Color FONDO = new Color(250, 255, 250);
     private static final Color BLANCO = Color.WHITE;
     private static final Color GRIS_OSCURO = new Color(51, 51, 51);
+    private static final Color GRIS_BOTON = new Color(128, 128, 128);
+    private static final Color GRIS_BOTON_HOVER = new Color(100, 100, 100);
 
     // ============================
     // COMPONENTES DE LA INTERFAZ
@@ -51,6 +53,7 @@ public class BonoMetro extends JFrame {
 
     private JMonthChooser elegirMes;       // Componente para seleccionar el mes de recarga
     private JButton btnRecargar;           // Botón principal para confirmar la recarga
+    private JButton btnVolver;             // Botón para volver a la ventana de login
 
 
     // Array con los nombres de los meses en español para mostrar al usuario
@@ -136,7 +139,7 @@ public class BonoMetro extends JFrame {
         // Agregar los tres paneles principales
         contenedor.add(crearPanelSuperior(), BorderLayout.NORTH);   // Encabezado con título
         contenedor.add(crearPanelCentral(), BorderLayout.CENTER);   // Área de selección de mes
-        contenedor.add(crearPanelInferior(), BorderLayout.SOUTH);   // Botón de recarga
+        contenedor.add(crearPanelInferior(), BorderLayout.SOUTH);   // Botones de acción
 
         add(contenedor);
     }
@@ -153,8 +156,26 @@ public class BonoMetro extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 25, 20, 25));
 
         // Icono decorativo del tren (emoji)
-        JLabel iconoTren = new JLabel("🚄", SwingConstants.CENTER);
-        iconoTren.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+        iconoTren = new JLabel();
+        try {
+            URL imgURL = getClass().getResource("/title_image.png");
+            if (imgURL != null) {
+                ImageIcon icon = new ImageIcon(imgURL);
+                // Escalar la imagen a un tamaño adecuado (por ejemplo, 80x80)
+                Image imagenEscalada = icon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                iconoTren.setIcon(new ImageIcon(imagenEscalada));
+            } else {
+                // Fallback si no se encuentra la imagen
+                iconoTren.setText("🚄");
+                iconoTren.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+                System.err.println("Advertencia: No se encontró 'title_image.png' en resources.");
+            }
+        } catch (Exception e) {
+            iconoTren.setText("🚄");
+            iconoTren.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
+            System.err.println("Error al cargar la imagen del título: " + e.getMessage());
+        }
+        iconoTren.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Título principal en blanco y negrita
         lblTitulo = new JLabel("RECARGA BONOMETRO", SwingConstants.CENTER);
@@ -162,12 +183,12 @@ public class BonoMetro extends JFrame {
         lblTitulo.setForeground(BLANCO);
 
         // Subtítulo con el nombre del servicio
-        JLabel lblSubtitulo = new JLabel("Metro de Sevilla", SwingConstants.CENTER);
+        lblSubtitulo = new JLabel("Metro de Sevilla", SwingConstants.CENTER);
         lblSubtitulo.setFont(new Font("Segoe UI", Font.ITALIC, 14));
         lblSubtitulo.setForeground(VERDE_OSCURO);
 
         // Panel para agrupar título y subtítulo verticalmente
-        JPanel panelTexto = new JPanel(new GridLayout(2, 1, 0, 5));
+        panelTexto = new JPanel(new GridLayout(2, 1, 0, 5));
         panelTexto.setBackground(VERDE_CLARO);
         panelTexto.add(lblTitulo);
         panelTexto.add(lblSubtitulo);
@@ -219,9 +240,9 @@ public class BonoMetro extends JFrame {
         ));
 
         // Etiqueta "Mes:"
-        JLabel lblMes = new JLabel("Mes:");
+        lblMes = new JLabel("Mes:");
         lblMes.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        lblMes.setForeground(VERDE_CLARO);
+        lblMes.setForeground(VERDE_OSCURO);
 
         // Selector de mes (JMonthChooser de la librería JCalendar)
         elegirMes = new JMonthChooser();
@@ -236,7 +257,7 @@ public class BonoMetro extends JFrame {
         panel.add(contenedorMes, gbc);
 
         // --- Información adicional sobre la recarga ---
-        JLabel lblInfo = new JLabel("Recarga válida para todo el mes seleccionado", SwingConstants.CENTER);
+        lblInfo = new JLabel("Recarga válida para todo el mes seleccionado", SwingConstants.CENTER);
         lblInfo.setFont(new Font("Segoe UI", Font.ITALIC, 12));
         lblInfo.setForeground(new Color(100, 100, 100));
         gbc.gridy = 2;
@@ -247,13 +268,41 @@ public class BonoMetro extends JFrame {
     }
 
     /**
-     * Crea el panel inferior que contiene el botón de recarga.
+     * Crea el panel inferior que contiene los botones de acción.
+     * Incluye el botón de volver y el botón de recarga.
      *
-     * @return JPanel con el botón de confirmación
+     * @return JPanel con los botones de navegación y confirmación
      */
     private JPanel crearPanelInferior() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 20));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 20));
         panel.setBackground(FONDO);
+
+        // Botón de volver a la ventana de login
+        btnVolver = new JButton("VOLVER");
+        btnVolver.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnVolver.setPreferredSize(new Dimension(140, 50));
+        btnVolver.setBackground(GRIS_BOTON);
+        btnVolver.setForeground(BLANCO);
+        btnVolver.setFocusPainted(false);
+        btnVolver.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(GRIS_OSCURO, 2),
+                BorderFactory.createEmptyBorder(10, 20, 10, 20)
+        ));
+        btnVolver.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnVolver.setToolTipText("Volver a la ventana principal de login");
+
+        // Efecto hover para el botón volver
+        btnVolver.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnVolver.setBackground(GRIS_BOTON_HOVER);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnVolver.setBackground(GRIS_BOTON);
+            }
+        });
 
         // Botón principal de recarga
         btnRecargar = new JButton("RECARGAR BONOMETRO");
@@ -267,7 +316,7 @@ public class BonoMetro extends JFrame {
                 BorderFactory.createEmptyBorder(10, 20, 10, 20)
         ));
         btnRecargar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));  // Cursor de mano
-        btnRecargar.setToolTipText("Haga clic para confirmar la recarga de su bonometro.");
+        btnRecargar.setToolTipText("Haga clic para confirmar la recarga de su bonometro");
 
         // Efecto hover: cambiar color al pasar el ratón
         btnRecargar.addMouseListener(new MouseAdapter() {
@@ -282,6 +331,7 @@ public class BonoMetro extends JFrame {
             }
         });
 
+        panel.add(btnVolver);
         panel.add(btnRecargar);
         return panel;
     }
@@ -291,9 +341,12 @@ public class BonoMetro extends JFrame {
     // ============================
     /**
      * Configura los listeners de eventos para los componentes interactivos.
-     * Incluye el botón de recarga, el selector de mes y el cierre de ventana.
+     * Incluye el botón de recarga, el botón de volver, el selector de mes y el cierre de ventana.
      */
     private void agregarEventos() {
+        // Evento del botón de volver: regresa a la ventana de login
+        btnVolver.addActionListener(e -> volverALogin());
+
         // Evento del botón de recarga: ejecuta la validación y confirmación
         btnRecargar.addActionListener(e -> validarYRecargar());
 
@@ -327,7 +380,22 @@ public class BonoMetro extends JFrame {
     // LÓGICA DE NEGOCIO
     // ============================
     /**
-     * Valida la selección del usuario y procesa la recarga del bonometro.
+     * Vuelve a la ventana de login cerrando la ventana actual.
+     * Cierra esta ventana y abre una nueva instancia de la ventana Login.
+     */
+    private void volverALogin() {
+        // Cerrar la ventana actual
+        dispose();
+
+        // Crear y mostrar la ventana de Login
+        SwingUtilities.invokeLater(() -> {
+            login ventanaLogin = new login();
+            ventanaLogin.setVisible(true);
+        });
+    }
+
+    /**
+     * Valída la selección del usuario y procesa la recarga del bonometro.
      * Muestra un diálogo de confirmación y, si se acepta, confirma la recarga exitosa.
      */
     private void validarYRecargar() {
