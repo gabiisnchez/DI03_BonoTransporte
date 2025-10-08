@@ -60,34 +60,6 @@ proyecto/
 - IDE Java (IntelliJ IDEA, Eclipse, NetBeans, etc.)
 - Librería JCalendar 1.4
 
-### Pasos de Instalación
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/tu-usuario/sistema-transporte-sevilla.git
-   cd sistema-transporte-sevilla
-   ```
-
-2. **Añadir la librería JCalendar**
-   - Descargar JCalendar 1.4 desde [toedter.com](https://toedter.com/jcalendar/)
-   - Añadir `jcalendar-1.4.jar` al classpath del proyecto
-
-3. **Configurar recursos**
-   - Colocar las imágenes en la carpeta `resources`
-   - Asegurar que el IDE reconoce la carpeta como directorio de recursos
-
-4. **Compilar y ejecutar**
-   ```bash
-   javac -cp .:lib/jcalendar-1.4.jar src/*.java
-   java -cp .:lib/jcalendar-1.4.jar:src login
-   ```
-
-   En Windows:
-   ```cmd
-   javac -cp .;lib\jcalendar-1.4.jar src\*.java
-   java -cp .;lib\jcalendar-1.4.jar;src login
-   ```
-
 ## 📖 Guía de Uso
 
 ### 1. Pantalla de Login
@@ -130,22 +102,27 @@ proyecto/
 
 ### Interfaz Principal (Login)
 
-![Pantalla de Login](resources/screenshot_login.png)
+<p align="center">
+  <img src="src/main/resources/screenshot_login.png" alt="Pantalla de Login" width="600"/>
+</p>
 
-*La pantalla de inicio permite seleccionar el tipo de bono y validar la tarjeta del usuario.*
+*<p align="center">La pantalla de inicio permite seleccionar el tipo de bono y validar la tarjeta del usuario.</p>*
 
 ### Interfaz BonoBus
 
-![Interfaz BonoBus](resources/screenshot_bonobus.png)
+<p align="center">
+  <img src="src/main/resources/screenshot_bonobus.png" alt="Interfaz BonoBus" width="600"/>
+</p>
 
-*Diseño inspirado en los colores corporativos de Tussam con información detallada del bono.*
+*<p align="center">Diseño inspirado en los colores corporativos de Tussam con información detallada del bono.</p>*
 
 ### Interfaz BonoMetro
 
-![Interfaz BonoMetro](resources/screenshot_bonometro.png)
+<p align="center">
+  <img src="src/main/resources/screenshot_bonometro.png" alt="Interfaz BonoMetro" width="600"/>
+</p>
 
-*Interfaz limpia con la identidad visual del Metro de Sevilla.*
-
+*<p align="center">Interfaz limpia con la identidad visual del Metro de Sevilla.</p>*
 
 ## 📝 Funcionalidades Extra Implementadas
 
