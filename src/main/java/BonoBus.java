@@ -256,7 +256,7 @@ public class BonoBus extends JFrame {
         ));
         panelSelector.setMaximumSize(new Dimension(300, 180));
 
-        lblMes = new JLabel("MES:");
+        lblMes = new JLabel("Mes:");
         lblMes.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblMes.setForeground(NARANJA_TUSSAM);
         lblMes.setAlignmentX(Component.CENTER_ALIGNMENT);

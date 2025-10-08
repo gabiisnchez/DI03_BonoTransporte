@@ -443,7 +443,7 @@ public class login extends JFrame {
     }
 
     // ============================
-    // MÉTODO PRINCIPAL
+    // METODO PRINCIPAL
     // ============================
     /**
      * Punto de entrada de la aplicación.
