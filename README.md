@@ -239,7 +239,14 @@ private boolean validarNumeroTarjeta(String numero) {
 **Solución**: Verificar que la carpeta `resources` esté marcada como "Resources Root" en el IDE.
 
 ### Problema: JCalendar no encontrado
-**Solución**: Asegurar que `jcalendar-1.4.jar` esté correctamente añadido al pom.xml.
+**Solución**: Asegurar que `jcalendar` esté correctamente añadido al pom.xml como dependencia de la siguiente manera:
+````xml
+<dependency>
+    <groupId>com.toedter</groupId>
+    <artifactId>jcalendar</artifactId>
+    <version>1.4</version>
+</dependency>
+````
 
 ### Problema: Caracteres especiales no se muestran correctamente
 **Solución**: Compilar con encoding UTF-8:
